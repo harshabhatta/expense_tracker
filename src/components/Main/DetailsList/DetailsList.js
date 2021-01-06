@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   List,
   ListItem,
@@ -10,39 +10,23 @@ import {
 } from '@material-ui/core';
 import MoneyOffIcon from '@material-ui/icons/MoneyOff';
 import DeleteIcon from '@material-ui/icons/Delete';
+import { ExpenseTrackerContext } from '../../../Context/Context';
 
 import useStyles from './DetailsListStyles';
 
-const descriptions = [
-  {
-    id: 1,
-    type: 'Income',
-    category: 'Salary',
-    amount: 200,
-    date: '24 Dec 2020',
-  },
-  { id: 2, type: 'Expense', category: 'Pets', amount: 20, date: '26 Dec 2020' },
-  {
-    id: 3,
-    type: 'Income',
-    category: 'Business',
-    amount: 2000,
-    date: '24 Dec 2020',
-  },
-];
-
 const DetailsList = () => {
   const classes = useStyles();
+  const { DeleteTransaction, transactions } = useContext(ExpenseTrackerContext);
   return (
     <div>
       <List className={classes.list}>
-        {descriptions.map((description) => {
+        {transactions.map((transaction) => {
           return (
-            <ListItem key={description.id}>
+            <ListItem key={transaction.id}>
               <ListItemAvatar>
                 <Avatar
                   className={
-                    description.type === 'Income'
+                    transaction.type === 'Income'
                       ? classes.avatarIncome
                       : classes.avatarExpense
                   }
@@ -51,11 +35,15 @@ const DetailsList = () => {
                 </Avatar>
               </ListItemAvatar>
               <ListItemText
-                primary={description.category}
-                secondary={`$${description.amount} - ${description.date}`}
+                primary={transaction.category}
+                secondary={`$${transaction.amount} - ${transaction.date}`}
               />
               <ListItemSecondaryAction>
-                <IconButton edge='end' aria-label='delete'>
+                <IconButton
+                  edge='end'
+                  aria-label='delete'
+                  onClick={() => DeleteTransaction(transaction.id)}
+                >
                   <DeleteIcon />
                 </IconButton>
               </ListItemSecondaryAction>

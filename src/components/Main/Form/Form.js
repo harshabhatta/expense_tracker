@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import {
   Grid,
   Button,
@@ -9,11 +9,33 @@ import {
   Input,
   MenuItem,
 } from '@material-ui/core';
+import { ExpenseTrackerContext } from '../../../Context/Context';
+import { v4 as uuidv4 } from 'uuid';
 
 import useStyles from './FormStyles';
 
+const initialState = {
+  type: '',
+  category: '',
+  amount: '',
+  date: new Date(),
+};
+
 const Form = () => {
   const classes = useStyles();
+  const [formData, setformData] = useState(initialState);
+  const { AddTransaction } = useContext(ExpenseTrackerContext);
+
+  const CreateTransaction = () => {
+    const transaction = {
+      ...formData,
+      amount: Number(formData.amount),
+      id: uuidv4(),
+    };
+    AddTransaction(transaction);
+    setformData(initialState);
+  };
+
   return (
     <div>
       <Grid container spacing={2}>
@@ -23,9 +45,16 @@ const Form = () => {
         <Grid item xs={6}>
           <FormControl fullWidth>
             <InputLabel id='type-label'>Type</InputLabel>
-            <Select value='type' labelId='type-label' id='type-select'>
-              <MenuItem value='income'>Income</MenuItem>
-              <MenuItem value='expense'>Expense</MenuItem>
+            <Select
+              labelId='type-label'
+              id='type-select'
+              value={formData.type}
+              onChange={(e) =>
+                setformData({ ...formData, type: e.target.value })
+              }
+            >
+              <MenuItem value='Income'>Income</MenuItem>
+              <MenuItem value='Expense'>Expense</MenuItem>
             </Select>
           </FormControl>
         </Grid>
@@ -33,12 +62,15 @@ const Form = () => {
           <FormControl fullWidth>
             <InputLabel id='category-label'>Category</InputLabel>
             <Select
-              value='category'
+              value={formData.category}
               labelId='category-label'
               id='category-select'
+              onChange={(e) => {
+                setformData({ ...formData, category: e.target.value });
+              }}
             >
-              <MenuItem value='business'>Business</MenuItem>
-              <MenuItem value='pets'>Pets</MenuItem>
+              <MenuItem value='Business'>Business</MenuItem>
+              <MenuItem value='Pets'>Pets</MenuItem>
             </Select>
           </FormControl>
         </Grid>
@@ -47,7 +79,14 @@ const Form = () => {
         <Grid item xs={6}>
           <FormControl>
             <InputLabel>Amount</InputLabel>
-            <Input type='number' placeholder='Amount'></Input>
+            <Input
+              type='number'
+              placeholder='Amount'
+              value={formData.amount}
+              onChange={(e) => {
+                setformData({ ...formData, amount: e.target.value });
+              }}
+            />
           </FormControl>
         </Grid>
         <Grid item xs={6}>
@@ -60,6 +99,10 @@ const Form = () => {
                 shrink: true,
               }}
               style={{ width: '90%' }}
+              value={formData.date}
+              onChange={(e) => {
+                setformData({ ...formData, date: e.target.value });
+              }}
             />
           </FormControl>
         </Grid>
@@ -69,6 +112,7 @@ const Form = () => {
         color='primary'
         className={classes.button}
         fullWidth
+        onClick={CreateTransaction}
       >
         Create
       </Button>
