@@ -11,6 +11,11 @@ import {
 } from '@material-ui/core';
 import { ExpenseTrackerContext } from '../../../Context/Context';
 import { v4 as uuidv4 } from 'uuid';
+import DateFormat from '../../../utils/DateFormat';
+import {
+  incomeCategories,
+  expenseCategories,
+} from '../../../constants/constants';
 
 import useStyles from './FormStyles';
 
@@ -18,13 +23,16 @@ const initialState = {
   type: '',
   category: '',
   amount: '',
-  date: new Date(),
+  date: DateFormat(new Date()),
 };
 
 const Form = () => {
   const classes = useStyles();
   const [formData, setformData] = useState(initialState);
   const { AddTransaction } = useContext(ExpenseTrackerContext);
+
+  const requiredCategories =
+    formData.type === 'Income' ? incomeCategories : expenseCategories;
 
   const CreateTransaction = () => {
     const transaction = {
@@ -69,8 +77,11 @@ const Form = () => {
                 setformData({ ...formData, category: e.target.value });
               }}
             >
-              <MenuItem value='Business'>Business</MenuItem>
-              <MenuItem value='Pets'>Pets</MenuItem>
+              {requiredCategories.map((c) => (
+                <MenuItem value={c.type} key={c.type}>
+                  {c.type}
+                </MenuItem>
+              ))}
             </Select>
           </FormControl>
         </Grid>
@@ -101,7 +112,7 @@ const Form = () => {
               style={{ width: '90%' }}
               value={formData.date}
               onChange={(e) => {
-                setformData({ ...formData, date: e.target.value });
+                setformData({ ...formData, date: DateFormat(e.target.value) });
               }}
             />
           </FormControl>
