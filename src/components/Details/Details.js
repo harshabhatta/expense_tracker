@@ -1,11 +1,14 @@
 import React from 'react';
 import { Card, CardContent, Typography } from '@material-ui/core';
 import { Doughnut } from 'react-chartjs-2';
+import useTransactions from '../../customHooks/useTransactions';
 
 import useStyles from './DetailsStyles';
 
 export const Details = ({ title }) => {
   const classes = useStyles();
+  const { total, doughnutData } = useTransactions(title);
+
   return (
     <div>
       <Card className={title === 'Income' ? classes.income : classes.expense}>
@@ -14,10 +17,10 @@ export const Details = ({ title }) => {
             {title}
           </Typography>
           <Typography variant='h6' color='textSecondary'>
-            $50
+            {`₹${total}`}
           </Typography>
+          <Doughnut data={doughnutData} />
         </CardContent>
-        <CardContent></CardContent>
       </Card>
     </div>
   );
