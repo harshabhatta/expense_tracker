@@ -7,7 +7,7 @@ import useStyles from './DetailsStyles';
 
 export const Details = ({ title }) => {
   const classes = useStyles();
-  const { total, doughnutData } = useTransactions(title);
+  const { typeTotal, doughnutData } = useTransactions(title);
 
   return (
     <div>
@@ -17,7 +17,7 @@ export const Details = ({ title }) => {
             {title}
           </Typography>
           <Typography variant='h6' color='textSecondary'>
-            {`₹${total}`}
+            {`₹${typeTotal}`}
           </Typography>
           <Doughnut data={doughnutData} />
         </CardContent>

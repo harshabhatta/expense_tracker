@@ -12,7 +12,11 @@ const useTransactions = (type) => {
   // extract transactions based on type -> income/expense
   const typeTransactions = transactions.filter((t) => t.type === type);
   // calculate the total amount of type
-  const total = typeTransactions.reduce((acc, curr) => acc + curr.amount, 0);
+  const typeTotal = typeTransactions.reduce(
+    (acc, curr) => acc + curr.amount,
+    0
+  );
+
   // sum up the amounts to individual constant categories
   resetCategories();
   const selectedCategories =
@@ -35,7 +39,7 @@ const useTransactions = (type) => {
     // These labels appear in the legend and in the tooltips when hovering different arcs
     labels: requiredTransactions.map((t) => t.type),
   };
-  return { total, doughnutData };
+  return { typeTotal, doughnutData };
 };
 
 export default useTransactions;
