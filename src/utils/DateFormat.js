@@ -9,7 +9,6 @@ const DateFormat = (value) => {
     month = `0${month}`;
   }
   let year = d.getFullYear();
-  console.log([year, month, date].join('-'));
   return [year, month, date].join('-');
 };
 

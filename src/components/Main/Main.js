@@ -14,14 +14,7 @@ function Main() {
           <Typography color='textPrimary' variant='h6'>
             Expense Tracker
           </Typography>
-          <Typography
-            color='textSecondary'
-            variant='subtitle2'
-            style={{ fontSize: '12px' }}
-          >
-            Powered by speechly
-          </Typography>
-          <Typography color='textPrimary' variant='h6' align='center'>
+          {/* <Typography color='textPrimary' variant='h6' align='center'>
             Total Balance $1057
           </Typography>
           <Typography
@@ -31,16 +24,21 @@ function Main() {
             style={{ fontSize: '12px' }}
           >
             Say the command: Add the expense of $50 for pets to thursday
-          </Typography>
+          </Typography> */}
         </CardContent>
-        {/* <CardContent className={classes.cardContent}>
+        <CardContent className={classes.cardContent}>
           <Typography color='textPrimary' variant='h6' align='center'>
             Total Balance $1057
           </Typography>
-          <Typography color='textSecondary' align='center' variant='subtitle2'>
-            Say the command: Add the expense of $50 for pets to thursday
+          <Typography
+            color='textSecondary'
+            align='center'
+            variant='subtitle2'
+            style={{ fontSize: '12px' }}
+          >
+            Say: Add Income of 5000 rupees of category salary on next thursday
           </Typography>
-        </CardContent> */}
+        </CardContent>
         <Divider className={classes.divider} />
         <CardContent className={classes.cardContent}>
           <Form />

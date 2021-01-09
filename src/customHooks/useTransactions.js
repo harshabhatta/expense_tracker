@@ -22,10 +22,8 @@ const useTransactions = (type) => {
     if (category) {
       category.amount += t.amount;
     }
-    console.log(t, category, selectedCategories);
   });
   const requiredTransactions = selectedCategories.filter((s) => s.amount > 0);
-  console.log(requiredTransactions);
   // setup react-chartJs doughnut data
   const doughnutData = {
     datasets: [
@@ -37,9 +35,6 @@ const useTransactions = (type) => {
     // These labels appear in the legend and in the tooltips when hovering different arcs
     labels: requiredTransactions.map((t) => t.type),
   };
-
-  console.log(doughnutData);
-
   return { total, doughnutData };
 };
 
