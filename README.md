@@ -14,6 +14,7 @@ Most importantly, I've added voice capabilities to this application using Speech
 #### Deployment
 
 The application is deployed in netlify with the below link for you to check out the functionality
+<https://react-expense-tracker-hkn.netlify.app/>
 
 #### Setup
 
