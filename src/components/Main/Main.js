@@ -22,8 +22,13 @@ function Main() {
           <Typography color='textPrimary' variant='h6' align='center'>
             Total Balance ₹{balance}
           </Typography>
-          <Typography color='textSecondary' align='center' variant='subtitle2'>
-            Say: Add Income of 5000 rupees of category salary on next thursday
+          <Typography
+            color='textSecondary'
+            align='center'
+            variant='subtitle2'
+            style={{ fontSize: '12px' }}
+          >
+            Say: Add Expense of 2000 rupees of category Travel on next Wednesday
           </Typography>
         </CardContent>
         <Divider className={classes.divider} />
