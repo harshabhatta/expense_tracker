@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import {
   List,
   ListItem,
@@ -11,14 +11,23 @@ import {
 import MoneyOffIcon from '@material-ui/icons/MoneyOff';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { ExpenseTrackerContext } from '../../../Context/Context';
+import CustomizedSnackbar from '../../Snackbar/CustomizedSnackbar';
 
 import useStyles from './DetailsListStyles';
 
 const DetailsList = () => {
   const classes = useStyles();
   const { DeleteTransaction, transactions } = useContext(ExpenseTrackerContext);
+  const [open, setOpen] = useState(false);
+
+  const deleteTransactionHandler = (id) => {
+    DeleteTransaction(id);
+    setOpen(true);
+  };
+
   return (
     <div>
+      <CustomizedSnackbar text='deleted' open={open} setOpen={setOpen} />
       <List className={classes.list}>
         {transactions.map((transaction) => {
           return (
@@ -42,7 +51,7 @@ const DetailsList = () => {
                 <IconButton
                   edge='end'
                   aria-label='delete'
-                  onClick={() => DeleteTransaction(transaction.id)}
+                  onClick={() => deleteTransactionHandler(transaction.id)}
                 >
                   <DeleteIcon />
                 </IconButton>

@@ -19,6 +19,7 @@ import {
 } from '../../../constants/constants';
 
 import useStyles from './FormStyles';
+import CustomizedSnackbar from '../../Snackbar/CustomizedSnackbar';
 
 const initialState = {
   type: '',
@@ -32,6 +33,7 @@ const Form = () => {
   const { segment } = useSpeechContext();
   const [formData, setformData] = useState(initialState);
   const { AddTransaction } = useContext(ExpenseTrackerContext);
+  const [open, setOpen] = useState(false);
 
   const requiredCategories =
     formData.type === 'Income' ? incomeCategories : expenseCategories;
@@ -46,6 +48,7 @@ const Form = () => {
     };
     AddTransaction(transaction);
     setformData(initialState);
+    setOpen(true);
   };
 
   useEffect(() => {
@@ -102,6 +105,7 @@ const Form = () => {
 
   return (
     <div>
+      <CustomizedSnackbar open={open} setOpen={setOpen} text='added' />
       <Grid container spacing={2}>
         <Grid item xs={12}>
           {segment && segment.words.map((w) => w.value).join(' ')}

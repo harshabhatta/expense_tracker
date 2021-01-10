@@ -22,12 +22,7 @@ function Main() {
           <Typography color='textPrimary' variant='h6' align='center'>
             Total Balance ₹{balance}
           </Typography>
-          <Typography
-            color='textSecondary'
-            align='center'
-            variant='subtitle2'
-            style={{ fontSize: '12px' }}
-          >
+          <Typography color='textSecondary' align='center' variant='subtitle2'>
             Say: Add Income of 5000 rupees of category salary on next thursday
           </Typography>
         </CardContent>

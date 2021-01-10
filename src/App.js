@@ -34,10 +34,18 @@ function App() {
       <Grid item xs={12} sm={4} className={classes.last}>
         <Details title='Expense' />
       </Grid>
-      <PushToTalkButtonContainer>
-        <PushToTalkButton />
-        <ErrorPanel />
-      </PushToTalkButtonContainer>
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <PushToTalkButtonContainer>
+          <PushToTalkButton size='4rem' />
+          <ErrorPanel />
+        </PushToTalkButtonContainer>
+      </div>
     </Grid>
   );
 }
